@@ -1,6 +1,6 @@
 /**
  * Phils Map Migrator
- * V 14.4 - Failsafe Fix & Debugging
+ * v1.0.0 - Official Release
  */
 
 class MapMigrator extends FormApplication {
@@ -324,4 +324,5 @@ Hooks.on('renderSceneDirectory', async (app, html) => {
     let headerActions = element.querySelector(".header-actions");
     if (headerActions) headerActions.append(button);
     else element.append(button);
+
 });

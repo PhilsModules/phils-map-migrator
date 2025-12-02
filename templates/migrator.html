@@ -1,0 +1,66 @@
+<form class="pmm-container">
+    <div class="pmm-intro">
+        <p>{{localize "PMM.Instructions"}}</p>
+    </div>
+
+    <div class="form-group pmm-row">
+        <label><i class="fas fa-crosshairs"></i> {{localize "PMM.CalibrationMode"}}</label>
+        <select id="cal-mode" class="pmm-select">
+            <option value="1" {{#if (eq calibrationMode 1)}}selected{{/if}}>{{localize "PMM.Mode1"}}</option>
+            <option value="2" {{#if (eq calibrationMode 2)}}selected{{/if}}>{{localize "PMM.Mode2"}}</option>
+            <option value="3" {{#if (eq calibrationMode 3)}}selected{{/if}}>{{localize "PMM.Mode3"}}</option>
+            <option value="4" {{#if (eq calibrationMode 4)}}selected{{/if}}>{{localize "PMM.Mode4"}}</option>
+            <option value="5" {{#if (eq calibrationMode 5)}}selected{{/if}}>{{localize "PMM.Mode5"}}</option>
+        </select>
+    </div>
+    
+    <div class="form-group pmm-row">
+        <label><i class="fas fa-map"></i> {{localize "PMM.SourceScene"}}</label>
+        <div class="pmm-flex">
+            <select name="sourceScene" id="source-scene" class="pmm-select">
+                {{#each scenes}}
+                <option value="{{this.id}}" {{#if (eq this.id ../selectedSource)}}selected{{/if}}>{{this.name}}</option>
+                {{/each}}
+            </select>
+            <button type="button" id="btn-cal-source" class="pmm-btn-cal">
+               <i class="fas fa-map-marker-alt"></i> {{localize "PMM.SetPoints"}} 
+               <span id="status-source" class="pmm-status {{#if sourceReady}}ready{{else}}not-ready{{/if}}">
+                   {{#if sourceReady}}✔{{else}}✖{{/if}}
+               </span>
+            </button>
+        </div>
+    </div>
+    
+    <div class="form-group pmm-row">
+        <label><i class="fas fa-map-signs"></i> {{localize "PMM.TargetScene"}}</label>
+        <div class="pmm-flex">
+            <select name="targetScene" id="target-scene" class="pmm-select">
+                {{#each scenes}}
+                <option value="{{this.id}}" {{#if (eq this.id ../selectedTarget)}}selected{{/if}}>{{this.name}}</option>
+                {{/each}}
+            </select>
+            <button type="button" id="btn-cal-target" class="pmm-btn-cal">
+               <i class="fas fa-map-marker-alt"></i> {{localize "PMM.SetPoints"}}
+               <span id="status-target" class="pmm-status {{#if targetReady}}ready{{else}}not-ready{{/if}}">
+                   {{#if targetReady}}✔{{else}}✖{{/if}}
+               </span>
+            </button>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label><b>{{localize "PMM.ContentToCopy"}}</b></label>
+        <div class="pmm-grid">
+            <div class="checkbox"><input type="checkbox" id="chk-walls" checked> {{localize "PMM.Walls"}}</div>
+            <div class="checkbox"><input type="checkbox" id="chk-lights" checked> {{localize "PMM.Lights"}}</div>
+            <div class="checkbox"><input type="checkbox" id="chk-tokens" checked> {{localize "PMM.Tokens"}}</div>
+            <div class="checkbox"><input type="checkbox" id="chk-notes" checked> {{localize "PMM.Notes"}}</div>
+            <div class="checkbox"><input type="checkbox" id="chk-sounds" checked> {{localize "PMM.Sounds"}}</div>
+            <div class="checkbox"><input type="checkbox" id="chk-drawings" checked> {{localize "PMM.Drawings"}}</div>
+        </div>
+    </div>
+
+    <button type="button" id="btn-migrate" class="pmm-migrate-btn">
+        <i class="fas fa-file-import"></i> {{localize "PMM.MigrateBtn"}}
+    </button>
+</form>

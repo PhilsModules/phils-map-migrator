@@ -1,0 +1,96 @@
+/* Fenster Grundeinstellungen */
+.pmm-window .window-content {
+    padding: 8px;
+    background: url("../../../ui/parchment.jpg") repeat;
+    color: #191813;
+    overflow-y: hidden !important;
+}
+
+/* Container */
+.pmm-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Überschrift */
+.pmm-intro {
+    font-size: 13px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #7a7971;
+    padding-bottom: 5px;
+}
+
+/* Zeilen Layout */
+.form-group.pmm-row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 3px;
+}
+
+.form-group.pmm-row label {
+    font-weight: bold;
+    margin-bottom: 3px;
+    color: #4b4a44;
+}
+
+/* Dropdown + Button Flexbox */
+.pmm-flex {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.pmm-select {
+    flex: 1;
+    height: 30px;
+}
+
+.pmm-btn-cal {
+    flex: 0 0 130px;
+    height: 30px;
+    line-height: 28px;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+/* Grid für Checkboxen */
+.pmm-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+    background: rgba(0, 0, 0, 0.05);
+    border: 1px solid #7a7971;
+    border-radius: 5px;
+    padding: 8px;
+    margin-top: 5px;
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 13px;
+}
+
+/* Haupt-Button */
+.pmm-migrate-btn {
+    background: #6e0000;
+    color: white;
+    font-weight: bold;
+    height: 40px;
+    border: 1px solid #000;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.pmm-migrate-btn:hover {
+    background: #ff0000;
+    box-shadow: 0 0 5px #ff0000;
+}
+
+.pmm-status {
+    margin-left: 5px;
+}
+.pmm-status.ready { color: green; }
+.pmm-status.not-ready { color: #888; }

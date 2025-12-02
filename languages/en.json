@@ -1,0 +1,36 @@
+{
+  "PMM": {
+    "Title": "Phils Map Migrator",
+    "SourceScene": "1. SOURCE (Original)",
+    "TargetScene": "2. TARGET (Remake)",
+    "CalibrationMode": "Calibration Mode",
+    "Points": "Points",
+    "Mode1": "1 Point: Quick-Shift (Move Only)",
+    "Mode2": "2 Points: Standard (Scale & Fit)",
+    "Mode3": "3 Points: Precise (Error Correction)",
+    "Mode4": "4 Points: High Accuracy (More Data)",
+    "Mode5": "5 Points: Perfectionist (Max Control)",
+    "SetPoints": "Set Points",
+    "ContentToCopy": "3. What to Migrate?",
+    "Walls": "Walls",
+    "Lights": "Lights",
+    "Tokens": "Tokens/Monsters",
+    "Notes": "Journal Pins",
+    "Sounds": "Ambient Sounds",
+    "Drawings": "Drawings",
+    "MigrateBtn": "⚡ MIGRATE CONTENT",
+    "WarningTitle": "⚠️ Geometry Mismatch!",
+    "WarningText": "The points selected do not match geometrically! <br>Example: Point 3 is left on Source, but right on Target.",
+    "WarningHint": "The result will likely be distorted. Do you want to proceed anyway?",
+    "Instructions": "Guide: Select mode. More points = higher accuracy for distorted maps.",
+    "Notif": {
+      "NoScene": "No scene selected!",
+      "ModeSource": "SOURCE: Click your reference points.",
+      "ModeTarget": "TARGET: Click the EXACT same points.",
+      "CalibDone": "Calibration complete!",
+      "NeedPoints": "Set your points first!",
+      "Migrating": "Calculating transformation...",
+      "Success": "Boom! Migration done."
+    }
+  }
+}

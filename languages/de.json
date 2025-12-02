@@ -1,0 +1,36 @@
+{
+  "PMM": {
+    "Title": "Phils Map Migrator",
+    "SourceScene": "1. QUELLE (Original)",
+    "TargetScene": "2. ZIEL (Remake)",
+    "CalibrationMode": "Kalibrierungs-Modus",
+    "Points": "Punkte",
+    "Mode1": "1 Punkt: Quick-Shift (Nur Verschieben)",
+    "Mode2": "2 Punkte: Standard (Skalieren & Sitzt)",
+    "Mode3": "3 Punkte: Präzise (Gleicht Fehler aus)",
+    "Mode4": "4 Punkte: Sehr Genau (Mehr Daten)",
+    "Mode5": "5 Punkte: Perfektionist (Maximale Kontrolle)",
+    "SetPoints": "Punkte setzen",
+    "ContentToCopy": "3. Was wird migriert?",
+    "Walls": "Wände",
+    "Lights": "Lichter",
+    "Tokens": "Monster/Token",
+    "Notes": "Journal Pins",
+    "Sounds": "Sounds",
+    "Drawings": "Zeichnungen",
+    "MigrateBtn": "⚡ INHALTE MIGRIEREN",
+    "WarningTitle": "⚠️ Geometrie passt nicht!",
+    "WarningText": "Die gesetzten Punkte stimmen geometrisch nicht überein! <br>Beispiel: Punkt 3 ist auf der Quelle links, aber auf dem Ziel rechts.",
+    "WarningHint": "Das Ergebnis wird wahrscheinlich verzerrt sein. Möchtest du trotzdem fortfahren?",
+    "Instructions": "Anleitung: Wähle den Modus. Mehr Punkte = Höhere Genauigkeit bei schwierigen Karten.",
+    "Notif": {
+      "NoScene": "Keine Szene ausgewählt!",
+      "ModeSource": "QUELLE: Klicke deine Referenzpunkte.",
+      "ModeTarget": "ZIEL: Klicke die exakt gleichen Punkte.",
+      "CalibDone": "Kalibrierung fertig!",
+      "NeedPoints": "Erst Punkte setzen!",
+      "Migrating": "Berechne Transformation...",
+      "Success": "Boom! Migration erledigt."
+    }
+  }
+}

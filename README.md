@@ -3,20 +3,18 @@
 ![Foundry v13 Compatible](https://img.shields.io/badge/Foundry-v13-brightgreen)
 ![Foundry v12 Compatible](https://img.shields.io/badge/Foundry-v12-green)
 ![License](https://img.shields.io/badge/License-GPLv3-blue)
-![Version](https://img.shields.io/badge/Version-1.1.0-orange)
 
 **Phils Map Migrator** is a professional utility module for Foundry VTT designed to transfer scene data (Walls, Lights, Tokens, etc.) from one map to another with mathematical precision.
 
 Stop manually realigning walls when upgrading from a draft map to a high-res version.
 
-## 🚀 New in v1.1.0: The Precision Update
-* **1-5 Point Calibration:** * **1 Point:** Quick-Shift (perfect for identical maps with just an offset).
+## 🚀 Key Features
+
+* **Flexible Calibration (1-5 Points):**
+    * **1 Point:** Quick-Shift (perfect for identical maps with just an offset).
     * **3-5 Points:** High Precision (uses averaging to fix distorted scans or hand-drawn grids).
 * **Geometry Failsafe:** The module now mathematically checks your points. If you click the wrong corner, it warns you before destroying your layout.
-* **Settings:** Customizable error tolerance threshold.
-
-## 🌟 Key Features
-* **Flexible Calibration:** Works regardless of resolution or grid size differences.
+* **Resolution Independent:** Works perfectly even if the new map has a different resolution or aspect ratio.
 * **Selective Migration:** Choose exactly what to copy:
     * 🧱 Walls
     * 💡 Lights (Ambient Lights)
@@ -31,7 +29,7 @@ Stop manually realigning walls when upgrading from a draft map to a high-res ver
 2.  Click **Install Module**.
 3.  Paste Manifest URL:
     ```
-    https://github.com/weylen86/phils-map-migrator/releases/latest/download/module.json
+    https://github.com/PhilsModules/phils-map-migrator/releases/latest/download/module.json
     ```
 4.  Click **Install**.
 
@@ -50,18 +48,15 @@ Stop manually realigning walls when upgrading from a draft map to a high-res ver
 
 Schluss mit manuellem Nachzeichnen oder stundenlangem Verschieben, nur weil du eine Map durch eine hochauflösende Version (oder eine Variante) ersetzen willst.
 
-## 🚀 Neu in v1.1.0: Das Präzisions-Update
+## 🚀 Funktionen
+
 * **1-5 Punkte System:**
     * **1 Punkt:** Für einfaches Verschieben (Offset-Korrektur).
     * **2 Punkte:** Der Standard (Skalieren & Ausrichten).
     * **3-5 Punkte:** Für schwierige Fälle (Scans, schräge Fotos). Das Tool berechnet den Durchschnitt, um Klick-Fehler oder Verzerrungen auszugleichen.
 * **Geometrie-Wächter (Failsafe):** Das Modul rechnet mit. Wenn du Punkt 3 auf der neuen Karte an die falsche Stelle setzt, warnt dich das Tool, bevor es Chaos anrichtet.
-* **Einstellungen:** Du kannst die Toleranz-Schwelle selbst festlegen.
-
-## 🛠️ Features
 * **Auflösungs-Unabhängig:** Egal ob die neue Karte 4k ist und die alte nur 720p – das Modul skaliert alles perfekt.
 * **Selektiv:** Kopiere nur das, was du brauchst (z.B. nur Wände und Lichter, aber keine Token).
-* **Sauber:** Nutzt temporäre Grafiken für die Kalibrierung – deine Datenbank bleibt sauber.
 
 ## 📖 Kurzanleitung
 
@@ -83,5 +78,5 @@ Du brauchst eine **Quell-Szene** (mit Wänden) und eine **Ziel-Szene** (leer).
 Haken setzen bei allem, was mit soll (Wände, Lichter, etc.) und auf **INHALTE MIGRIEREN** klicken. Fertig.
 
 ## 👨‍💻 Autor & Lizenz
-* **Phil** (GitHub: [weylen86](https://github.com/weylen86))
+* **Phil** (GitHub: [PhilsModules](https://github.com/PhilsModules))
 * Lizenziert unter [GPL-3.0](LICENSE).

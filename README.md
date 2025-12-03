@@ -12,10 +12,12 @@ Stop manually realigning walls when upgrading from a draft map to a high-res ver
 
 ## 🚀 Key Features
 
-### New in v1.1.0
-*   **Improved Map Selection:** Maps are now neatly grouped by their folders in the dropdown menu.
-*   **Resizable Window:** The tool window is now resizable and slightly wider for better usability.
-*   **Clean UI:** Map names are kept short and readable by using folder groups.
+### New in v1.2.0
+*   **Compact UI:** A streamlined, compact interface that takes up less screen space.
+*   **Folder View Toggle:** Switch between viewing maps by folder structure or as a flat list.
+*   **Backup Option:** New "Create Backup" checkbox to automatically clone the target scene before migration.
+*   **Natural Sorting:** Maps are now sorted naturally (e.g., Level 1, Level 2, Level 10).
+*   **Improved Visibility:** The module button is now prominently placed in the scene directory header.
 
 ### Core Features
 

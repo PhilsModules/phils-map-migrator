@@ -23,6 +23,12 @@
     "WarningText": "Die gesetzten Punkte stimmen geometrisch nicht überein! <br>Beispiel: Punkt 3 ist auf der Quelle links, aber auf dem Ziel rechts.",
     "WarningHint": "Das Ergebnis wird wahrscheinlich verzerrt sein. Möchtest du trotzdem fortfahren?",
     "Instructions": "Anleitung: Wähle den Modus. Mehr Punkte = Höhere Genauigkeit bei schwierigen Karten.",
+    "ToggleView": "Ordner/Liste umschalten",
+    "Unsorted": "--- Unsortiert ---",
+    "SelectAll": "Alle auswählen",
+    "DeselectAll": "Alle abwählen",
+    "Backup": "Sicherheitskopie erstellen",
+    "BackupDesc": "Erstellt eine Kopie der Ziel-Szene vor dem Migrieren.",
     "Notif": {
       "NoScene": "Keine Szene ausgewählt!",
       "ModeSource": "QUELLE: Klicke deine Referenzpunkte.",

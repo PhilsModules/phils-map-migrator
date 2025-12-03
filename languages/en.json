@@ -23,6 +23,12 @@
     "WarningText": "The points selected do not match geometrically! <br>Example: Point 3 is left on Source, but right on Target.",
     "WarningHint": "The result will likely be distorted. Do you want to proceed anyway?",
     "Instructions": "Guide: Select mode. More points = higher accuracy for distorted maps.",
+    "ToggleView": "Toggle Folder/List View",
+    "Unsorted": "--- Unsorted ---",
+    "SelectAll": "Select All",
+    "DeselectAll": "Deselect All",
+    "Backup": "Create Backup",
+    "BackupDesc": "Creates a copy of the target scene before migrating.",
     "Notif": {
       "NoScene": "No scene selected!",
       "ModeSource": "SOURCE: Click your reference points.",

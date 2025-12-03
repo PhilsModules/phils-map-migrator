@@ -79,6 +79,14 @@ Du brauchst eine **Quell-Szene** (mit Wänden) und eine **Ziel-Szene** (leer).
 ### 3. Migration
 Haken setzen bei allem, was mit soll (Wände, Lichter, etc.) und auf **INHALTE MIGRIEREN** klicken. Fertig.
 
-## 👨‍💻 Autor & Lizenz
-* **Phil** (GitHub: [PhilsModules](https://github.com/PhilsModules))
-* Lizenziert unter [GPL-3.0](LICENSE).
+## ❤️ Support the Development
+If you enjoy this module and want to support open-source development for Foundry VTT, check out my Patreon!
+
+Gefällt dir das Modul? Unterstütze die Weiterentwicklung auf Patreon!
+
+[**Become a Patron**](https://www.patreon.com/PhilsModules)
+
+---
+
+**Made with ❤️ for the Foundry VTT Community by [PhilsModules](https://github.com/PhilsModules)**
+*Licensed under GPL-3.0*

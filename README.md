@@ -3,7 +3,7 @@
 ![Foundry v13 Compatible](https://img.shields.io/badge/Foundry-v13-brightgreen)
 ![Foundry v12 Compatible](https://img.shields.io/badge/Foundry-v12-green)
 ![License](https://img.shields.io/badge/License-GPLv3-blue)
-![Version](https://img.shields.io/badge/Version-1.0.0-orange)
+![Version](https://img.shields.io/badge/Version-1.1.0-orange)
 [![Patreon](https://img.shields.io/badge/Support-Patreon-ff424d?logo=patreon)](https://www.patreon.com/PhilsModules)
 
 **Phils Map Migrator** is a professional utility module for Foundry VTT designed to transfer scene data (Walls, Lights, Tokens, etc.) from one map to another with mathematical precision.
@@ -11,6 +11,13 @@
 Stop manually realigning walls when upgrading from a draft map to a high-res version.
 
 ## 🚀 Key Features
+
+### New in v1.1.0
+*   **Improved Map Selection:** Maps are now neatly grouped by their folders in the dropdown menu.
+*   **Resizable Window:** The tool window is now resizable and slightly wider for better usability.
+*   **Clean UI:** Map names are kept short and readable by using folder groups.
+
+### Core Features
 
 * **Flexible Calibration (1-5 Points):**
     * **1 Point:** Quick-Shift (perfect for identical maps with just an offset).

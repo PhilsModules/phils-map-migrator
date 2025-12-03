@@ -18,8 +18,15 @@
         <label><i class="fas fa-map"></i> {{localize "PMM.SourceScene"}}</label>
         <div class="pmm-flex">
             <select name="sourceScene" id="source-scene" class="pmm-select">
-                {{#each scenes}}
+                {{#each noFolder}}
                 <option value="{{this.id}}" {{#if (eq this.id ../selectedSource)}}selected{{/if}}>{{this.name}}</option>
+                {{/each}}
+                {{#each folders}}
+                <optgroup label="{{this.name}}">
+                    {{#each this.scenes}}
+                    <option value="{{this.id}}" {{#if (eq this.id ../../selectedSource)}}selected{{/if}}>{{this.name}}</option>
+                    {{/each}}
+                </optgroup>
                 {{/each}}
             </select>
             <button type="button" id="btn-cal-source" class="pmm-btn-cal">
@@ -35,8 +42,15 @@
         <label><i class="fas fa-map-signs"></i> {{localize "PMM.TargetScene"}}</label>
         <div class="pmm-flex">
             <select name="targetScene" id="target-scene" class="pmm-select">
-                {{#each scenes}}
+                {{#each noFolder}}
                 <option value="{{this.id}}" {{#if (eq this.id ../selectedTarget)}}selected{{/if}}>{{this.name}}</option>
+                {{/each}}
+                {{#each folders}}
+                <optgroup label="{{this.name}}">
+                    {{#each this.scenes}}
+                    <option value="{{this.id}}" {{#if (eq this.id ../../selectedTarget)}}selected{{/if}}>{{this.name}}</option>
+                    {{/each}}
+                </optgroup>
                 {{/each}}
             </select>
             <button type="button" id="btn-cal-target" class="pmm-btn-cal">

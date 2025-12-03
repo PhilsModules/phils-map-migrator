@@ -1,6 +1,6 @@
 /**
  * Phils Map Migrator
- * v1.0.0 - Official Release
+ * v1.1.0 - Official Release
  */
 
 class MapMigrator extends FormApplication {
@@ -10,7 +10,7 @@ class MapMigrator extends FormApplication {
         this.targetPoints = [];
         this.sourceSceneId = null;
         this.targetSceneId = null;
-        this.tempGraphics = []; 
+        this.tempGraphics = [];
         // Standard auf 2 setzen
         this.calibrationMode = 2;
     }
@@ -21,15 +21,36 @@ class MapMigrator extends FormApplication {
             title: "Phils Map Migrator",
             template: "modules/phils-map-migrator/templates/migrator.html",
             classes: ["pmm-window"],
-            width: 450,
+            width: 500,
             height: "auto",
-            resizable: false
+            resizable: true
         });
     }
 
     getData() {
+        const scenes = game.scenes.contents;
+        const folders = {};
+        const noFolder = [];
+
+        scenes.forEach(s => {
+            if (s.folder) {
+                if (!folders[s.folder.name]) folders[s.folder.name] = [];
+                folders[s.folder.name].push({ id: s.id, name: s.name });
+            } else {
+                noFolder.push({ id: s.id, name: s.name });
+            }
+        });
+
+        // Sort
+        noFolder.sort((a, b) => a.name.localeCompare(b.name));
+        const sortedFolders = Object.keys(folders).sort().map(key => ({
+            name: key,
+            scenes: folders[key].sort((a, b) => a.name.localeCompare(b.name))
+        }));
+
         return {
-            scenes: game.scenes.map(s => ({id: s.id, name: s.name})),
+            folders: sortedFolders,
+            noFolder: noFolder,
             selectedSource: this.sourceSceneId,
             selectedTarget: this.targetSceneId,
             calibrationMode: this.calibrationMode,
@@ -38,9 +59,10 @@ class MapMigrator extends FormApplication {
         };
     }
 
+
     activateListeners(html) {
         super.activateListeners(html);
-        
+
         // Speichere die Auswahl sofort, wenn der User sie ändert
         html.find("#cal-mode").change(e => {
             this.calibrationMode = parseInt(e.target.value);
@@ -49,11 +71,11 @@ class MapMigrator extends FormApplication {
 
         html.find("#source-scene").change(e => this.sourceSceneId = e.target.value);
         html.find("#target-scene").change(e => this.targetSceneId = e.target.value);
-        
+
         html.find("#btn-cal-source").click(() => this.startCalibration("source"));
         html.find("#btn-cal-target").click(() => this.startCalibration("target"));
         html.find("#btn-migrate").click(() => this.runMigration(html));
-        
+
         if (!this.sourceSceneId) this.sourceSceneId = html.find("#source-scene").val();
         if (!this.targetSceneId) this.targetSceneId = html.find("#target-scene").val();
     }
@@ -61,7 +83,7 @@ class MapMigrator extends FormApplication {
     async startCalibration(mode) {
         const sceneId = mode === "source" ? this.sourceSceneId : this.targetSceneId;
         const scene = game.scenes.get(sceneId);
-        
+
         if (!scene) return ui.notifications.warn(game.i18n.localize("PMM.Notif.NoScene"));
 
         // Sicherstellen, dass wir die aktuelle Auswahl nutzen
@@ -69,8 +91,8 @@ class MapMigrator extends FormApplication {
         console.log(`PMM: Starting Calibration for ${mode} with ${neededPoints} points.`);
 
         await scene.view();
-        this.minimize(); 
-        
+        this.minimize();
+
         const modeText = mode === "source" ? "PMM.Notif.ModeSource" : "PMM.Notif.ModeTarget";
         ui.notifications.info(`${game.i18n.localize(modeText)} (${neededPoints}x klicken)`);
 
@@ -79,7 +101,7 @@ class MapMigrator extends FormApplication {
 
         const clickHandler = (event) => {
             const pos = event.data.getLocalPosition(canvas.stage);
-            
+
             points.push({ x: pos.x, y: pos.y });
             this.createMarker(pos.x, pos.y, points.length);
 
@@ -87,13 +109,13 @@ class MapMigrator extends FormApplication {
                 // optionales Feedback
             } else {
                 canvas.app.stage.off('mousedown', clickHandler);
-                
+
                 if (mode === "source") this.sourcePoints = points;
                 else this.targetPoints = points;
-                
+
                 ui.notifications.info(game.i18n.localize("PMM.Notif.CalibDone"));
                 this.clearMarkers();
-                this.maximize(); 
+                this.maximize();
                 this.render(true);
             }
         };
@@ -108,19 +130,19 @@ class MapMigrator extends FormApplication {
             marker.beginFill(0xFF0000, 0.2);
             marker.drawCircle(x, y, 10);
             marker.endFill();
-            
-            const style = new PIXI.TextStyle({fill: "#ffffff", fontWeight: "bold", fontSize: 20, stroke: "#000000", strokeThickness: 4});
+
+            const style = new PIXI.TextStyle({ fill: "#ffffff", fontWeight: "bold", fontSize: 20, stroke: "#000000", strokeThickness: 4 });
             const text = new PIXI.Text(index, style);
             text.anchor.set(0.5);
             text.x = x;
             text.y = y - 25;
-            
+
             canvas.stage.addChild(marker);
             canvas.stage.addChild(text);
-            
+
             this.tempGraphics.push(marker);
             this.tempGraphics.push(text);
-            
+
         } catch (err) { console.error(err); }
     }
 
@@ -142,11 +164,11 @@ class MapMigrator extends FormApplication {
             for (let j = i + 1; j < neededPoints; j++) {
                 const distS = Math.hypot(this.sourcePoints[i].x - this.sourcePoints[j].x, this.sourcePoints[i].y - this.sourcePoints[j].y);
                 const distT = Math.hypot(this.targetPoints[i].x - this.targetPoints[j].x, this.targetPoints[i].y - this.targetPoints[j].y);
-                
+
                 if (distS > 0) {
                     const r = distT / distS;
                     ratios.push(r);
-                    console.log(`Ratio P${i+1}-P${j+1}: ${r.toFixed(4)} (S:${distS.toFixed(1)} -> T:${distT.toFixed(1)})`);
+                    console.log(`Ratio P${i + 1}-P${j + 1}: ${r.toFixed(4)} (S:${distS.toFixed(1)} -> T:${distT.toFixed(1)})`);
                 }
             }
         }
@@ -230,14 +252,14 @@ class MapMigrator extends FormApplication {
             let totalDistTarget = 0;
 
             for (let i = 0; i < neededPoints - 1; i++) {
-                totalDistSource += Math.hypot(this.sourcePoints[i+1].x - this.sourcePoints[i].x, this.sourcePoints[i+1].y - this.sourcePoints[i].y);
-                totalDistTarget += Math.hypot(this.targetPoints[i+1].x - this.targetPoints[i].x, this.targetPoints[i+1].y - this.targetPoints[i].y);
+                totalDistSource += Math.hypot(this.sourcePoints[i + 1].x - this.sourcePoints[i].x, this.sourcePoints[i + 1].y - this.sourcePoints[i].y);
+                totalDistTarget += Math.hypot(this.targetPoints[i + 1].x - this.targetPoints[i].x, this.targetPoints[i + 1].y - this.targetPoints[i].y);
             }
 
             if (totalDistSource === 0) return ui.notifications.error("Fehler: Punkte liegen übereinander!");
-            
+
             scale = totalDistTarget / totalDistSource;
-            
+
             const sA = this.sourcePoints[0];
             const tA = this.targetPoints[0];
 
@@ -253,7 +275,7 @@ class MapMigrator extends FormApplication {
 
         const sScene = game.scenes.get(this.sourceSceneId);
         const tScene = game.scenes.get(this.targetSceneId);
-        
+
         const checks = {
             walls: html.find("#chk-walls").is(":checked"),
             lights: html.find("#chk-lights").is(":checked"),
@@ -269,14 +291,14 @@ class MapMigrator extends FormApplication {
             if (!collection || collection.size === 0) return [];
             return collection.map(doc => {
                 const d = doc.toObject();
-                delete d._id; 
-                delete d._stats; 
-                const pos = transform({x: d.x, y: d.y});
+                delete d._id;
+                delete d._stats;
+                const pos = transform({ x: d.x, y: d.y });
                 d.x = pos.x; d.y = pos.y;
-                
+
                 if (type === "Wall") {
-                    const p1 = transform({x: d.c[0], y: d.c[1]});
-                    const p2 = transform({x: d.c[2], y: d.c[3]});
+                    const p1 = transform({ x: d.c[0], y: d.c[1] });
+                    const p2 = transform({ x: d.c[2], y: d.c[3] });
                     d.c = [p1.x, p1.y, p2.x, p2.y];
                 }
                 else if (type === "Drawing") {
@@ -292,16 +314,16 @@ class MapMigrator extends FormApplication {
         };
 
         const creationMap = [];
-        if (checks.walls) creationMap.push({type: "Wall", data: process(sScene.walls, "Wall")});
-        if (checks.lights) creationMap.push({type: "AmbientLight", data: process(sScene.lights, "AmbientLight")});
-        if (checks.tokens) creationMap.push({type: "Token", data: process(sScene.tokens, "Token")});
-        if (checks.notes) creationMap.push({type: "Note", data: process(sScene.notes, "Note")});
-        if (checks.sounds) creationMap.push({type: "AmbientSound", data: process(sScene.sounds, "AmbientSound")});
-        if (checks.drawings) creationMap.push({type: "Drawing", data: process(sScene.drawings, "Drawing")});
+        if (checks.walls) creationMap.push({ type: "Wall", data: process(sScene.walls, "Wall") });
+        if (checks.lights) creationMap.push({ type: "AmbientLight", data: process(sScene.lights, "AmbientLight") });
+        if (checks.tokens) creationMap.push({ type: "Token", data: process(sScene.tokens, "Token") });
+        if (checks.notes) creationMap.push({ type: "Note", data: process(sScene.notes, "Note") });
+        if (checks.sounds) creationMap.push({ type: "AmbientSound", data: process(sScene.sounds, "AmbientSound") });
+        if (checks.drawings) creationMap.push({ type: "Drawing", data: process(sScene.drawings, "Drawing") });
 
         for (let item of creationMap) {
             if (item.data.length > 0) {
-                try { await tScene.createEmbeddedDocuments(item.type, item.data); } 
+                try { await tScene.createEmbeddedDocuments(item.type, item.data); }
                 catch (err) { console.error(`PMM Error ${item.type}`, err); }
             }
         }

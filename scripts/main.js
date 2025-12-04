@@ -48,72 +48,112 @@ class MapMigrator extends FormApplication {
             id: "phils-map-migrator",
             title: "Phils Map Migrator",
             template: "modules/phils-map-migrator/templates/migrator.html",
-            width: 400, // Reduced width
-            height: "auto", // Auto height
-            resizable: false
+            width: 400
         });
     }
 
     getData() {
         const useFolderView = game.settings.get("phils-map-migrator", "useFolderView");
         const scenes = game.scenes.contents;
+        const folders = {};
+        const noFolder = [];
+        const flatScenes = [];
 
-        let folders = {};
-        let noFolder = [];
-        let flatScenes = [];
+        // Helper: Get full folder path
+        const getFolderPath = (folder) => {
+            const parts = [folder.name];
+            let current = folder;
+            while (current.folder) {
+                const parentId = current.folder._id || current.folder;
+                const parent = game.folders.get(parentId);
+                if (parent) {
+                    current = parent;
+                    parts.unshift(current.name);
+                } else {
+                    break;
+                }
+            }
+            return parts.join(" / ");
+        };
 
-        // Natural Sort Helper
-        const naturalSort = (a, b) => a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' });
+        // Helper: Get short root folder name
+        const getShortFolderName = (folder) => {
+            if (!folder) return "";
+            let current = folder;
+            while (current.folder) {
+                const parentId = current.folder._id || current.folder;
+                const parent = game.folders.get(parentId);
+                if (parent) {
+                    current = parent;
+                } else {
+                    break;
+                }
+            }
+            return current.name.substring(0, 4).toUpperCase();
+        };
+
+        const naturalSort = (a, b) => a.name.localeCompare(b.name, undefined, { numeric: true });
+
+        // Prepare flatScenes (for list view)
+        scenes.forEach(s => {
+            let name = s.name;
+            if (s.folder) {
+                const code = getShortFolderName(s.folder);
+                if (code) name += ` [${code}]`;
+            }
+            flatScenes.push({ id: s.id, name: name, originalName: s.name });
+        });
+        // Sort flatScenes by originalName (case-insensitive), then by display name
+        flatScenes.sort((a, b) => {
+            const nameCompare = a.originalName.localeCompare(b.originalName, undefined, { sensitivity: "base", numeric: true });
+            if (nameCompare !== 0) return nameCompare;
+            return a.name.localeCompare(b.name, undefined, { sensitivity: "base", numeric: true });
+        });
+
+        let sortedFolders = [];
 
         if (useFolderView) {
             scenes.forEach(s => {
                 if (s.folder) {
-                    if (!folders[s.folder.name]) folders[s.folder.name] = [];
-                    folders[s.folder.name].push({ id: s.id, name: s.name });
+                    const fId = s.folder.id;
+                    if (!folders[fId]) {
+                        folders[fId] = {
+                            name: getFolderPath(s.folder),
+                            scenes: []
+                        };
+                    }
+                    folders[fId].scenes.push({ id: s.id, name: s.name });
                 } else {
                     noFolder.push({ id: s.id, name: s.name });
                 }
             });
 
-            // Sort Folders and Scenes
-            const sortedFolders = Object.keys(folders).sort().map(key => ({
-                name: key,
-                scenes: folders[key].sort(naturalSort)
-            }));
+            // Sort folders
+            sortedFolders = Object.values(folders).sort((a, b) => a.name.localeCompare(b.name));
+
+            // Sort scenes within folders
+            sortedFolders.forEach(f => f.scenes.sort(naturalSort));
 
             // Group Unsorted if necessary
             if (noFolder.length > 0) {
-                // Sort unsorted scenes first
                 noFolder.sort(naturalSort);
-
-                // Add them as a special folder group at the beginning
                 sortedFolders.unshift({
-                    name: game.i18n.localize("PMM.Unsorted"),
+                    name: game.i18n.localize("PMM.Unsorted") || "Unsorted",
                     scenes: noFolder
                 });
-
-                // Clear noFolder so it doesn't render twice
-                noFolder = [];
             }
-
-            folders = sortedFolders;
-        } else {
-            flatScenes = scenes.map(s => ({ id: s.id, name: s.name })).sort(naturalSort);
         }
-
-        const readyToMigrate = this.sourcePoints.length > 0 && this.targetPoints.length > 0;
 
         return {
             useFolderView: useFolderView,
-            folders: folders,
-            noFolder: noFolder, // Should be empty if useFolderView is true
+            folders: sortedFolders,
             flatScenes: flatScenes,
             selectedSource: this.sourceSceneId,
             selectedTarget: this.targetSceneId,
             calibrationMode: this.calibrationMode,
             sourceReady: this.sourcePoints.length > 0,
             targetReady: this.targetPoints.length > 0,
-            readyToMigrate: readyToMigrate
+            readyToMigrate: this.sourcePoints.length > 0 && this.targetPoints.length > 0
         };
     }
 

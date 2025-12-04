@@ -33,6 +33,8 @@
       "NoScene": "No scene selected!",
       "ModeSource": "SOURCE: Click your reference points.",
       "ModeTarget": "TARGET: Click the EXACT same points.",
+      "ClickPoints": "Click {count} points on the canvas.",
+      "PointsSet": "Points set!",
       "CalibDone": "Calibration complete!",
       "NeedPoints": "Set your points first!",
       "Migrating": "Calculating transformation...",

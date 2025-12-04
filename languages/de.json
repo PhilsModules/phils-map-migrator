@@ -33,6 +33,8 @@
       "NoScene": "Keine Szene ausgewählt!",
       "ModeSource": "QUELLE: Klicke deine Referenzpunkte.",
       "ModeTarget": "ZIEL: Klicke die exakt gleichen Punkte.",
+      "ClickPoints": "Klicke {count} Punkte auf der Karte.",
+      "PointsSet": "Punkte gesetzt!",
       "CalibDone": "Kalibrierung fertig!",
       "NeedPoints": "Erst Punkte setzen!",
       "Migrating": "Berechne Transformation...",

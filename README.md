@@ -4,7 +4,10 @@
 ![Foundry v12 Compatible](https://img.shields.io/badge/Foundry-v12-green)
 ![License](https://img.shields.io/badge/License-GPLv3-blue)
 ![Version](https://img.shields.io/badge/Version-1.2.1-orange)
-[![Patreon](https://img.shields.io/badge/Support-Patreon-ff424d?logo=patreon)](https://www.patreon.com/PhilsModules)
+
+
+<a href="Updates.md"><img src="https://img.shields.io/badge/CHECK-Changelog-blue" style="height: 25px;"></a>
+<a href="https://www.patreon.com/PhilsModules"><img src="https://img.shields.io/badge/SUPPORT-Patreon-ff424d?logo=patreon" style="height: 25px;"></a>
 
 **Phils Map Migrator** is a professional utility module for Foundry VTT designed to transfer scene data (Walls, Lights, Tokens, etc.) from one map to another with mathematical precision.
 
@@ -12,20 +15,7 @@ Stop manually realigning walls when upgrading from a draft map to a high-res ver
 
 ## 🚀 Key Features
 
-### New in v1.2.1
-*   **Improved Sorting:** Scene list now sorts by name first, then by folder code (numbers before letters).
-*   **Case Insensitive Sorting:** Fixed sorting issues where "Attack of" and "Attack Of" were separated.
-*   **Translation Fixes:** Added missing German translations and fixed typos.
-*   **Bug Fixes:** Resolved syntax errors and improved overall stability.
 
-### New in v1.2.0
-*   **Compact UI:** A streamlined, compact interface that takes up less screen space.
-*   **Folder View Toggle:** Switch between viewing maps by folder structure or as a flat list.
-*   **Backup Option:** New "Create Backup" checkbox to automatically clone the target scene before migration.
-*   **Natural Sorting:** Maps are now sorted naturally (e.g., Level 1, Level 2, Level 10).
-*   **Improved Visibility:** The module button is now prominently placed in the scene directory header.
-
-### Core Features
 
 * **Flexible Calibration (1-5 Points):**
     * **1 Point:** Quick-Shift (perfect for identical maps with just an offset).

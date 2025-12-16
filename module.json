@@ -2,7 +2,7 @@
   "id": "phils-map-migrator",
   "title": "Phils Map Migrator",
   "description": "Professional scene migration tool. Supports 1-5 point calibration, geometry checks, and automatic scaling for walls, lights, tokens, and more.",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "author": "Phil",
   "authors": [
     {
@@ -13,12 +13,13 @@
   ],
   "url": "https://github.com/PhilsModules/phils-map-migrator",
   "manifest": "https://github.com/PhilsModules/phils-map-migrator/releases/latest/download/module.json",
-  "download": "https://github.com/PhilsModules/phils-map-migrator/releases/download/v1.2.1/module.zip",
+  "download": "https://github.com/PhilsModules/phils-map-migrator/releases/latest/download/module.zip",
   "compatibility": {
     "minimum": "12",
     "verified": "13"
   },
   "esmodules": [
+    "scripts/MapAdjuster.js",
     "scripts/main.js"
   ],
   "styles": [

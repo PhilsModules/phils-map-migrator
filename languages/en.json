@@ -39,6 +39,30 @@
       "NeedPoints": "Set your points first!",
       "Migrating": "Calculating transformation...",
       "Success": "Boom! Migration done."
+    },
+    "Adjuster": {
+      "Title": "Map Adjuster (Fix Offsets)",
+      "Targets": "Targets",
+      "Pins": "Pins",
+      "Tokens": "Tokens",
+      "Both": "Both",
+      "Move": "Move",
+      "PixelStep": "Step (Pixels)",
+      "Scale": "Scale (Spacing)",
+      "ScaleHint": "Pushes items apart or pulls them together.",
+      "Factor": "Factor (%)",
+      "Horizontal": "Horizontal (X)",
+      "Vertical": "Vertical (Y)",
+      "Squish": "Squish",
+      "Stretch": "Stretch",
+      "SquishY": "Squish",
+      "StretchY": "Stretch",
+      "LaunchBtn": "Fix",
+      "LaunchTooltip": "Open Map Adjuster (Fix Offsets)",
+      "WarnNoTargets": "No targets found.",
+      "WarnNeedTwo": "Need at least 2 objects to scale.",
+      "ErrMove": "Error moving objects.",
+      "ErrScale": "Error scaling objects."
     }
   }
 }

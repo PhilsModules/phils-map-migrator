@@ -39,6 +39,30 @@
       "NeedPoints": "Erst Punkte setzen!",
       "Migrating": "Berechne Transformation...",
       "Success": "Boom! Migration erledigt."
+    },
+    "Adjuster": {
+      "Title": "Karte anpassen (Offset Fix)",
+      "Targets": "Ziele",
+      "Pins": "Pins",
+      "Tokens": "Token",
+      "Both": "Beides",
+      "Move": "Verschieben",
+      "PixelStep": "Schritt (Pixel)",
+      "Scale": "Abstände (Skalieren)",
+      "ScaleHint": "Drückt Objekte auseinander oder zieht sie zusammen.",
+      "Factor": "Faktor (%)",
+      "Horizontal": "Breite (X)",
+      "Vertical": "Höhe (Y)",
+      "Squish": "Enger",
+      "Stretch": "Breiter",
+      "SquishY": "Flacher",
+      "StretchY": "Höher",
+      "LaunchBtn": "Fix",
+      "LaunchTooltip": "Map Adjuster starten (Offsets korrigieren)",
+      "WarnNoTargets": "Keine Ziele gefunden.",
+      "WarnNeedTwo": "Brauche mindestens 2 Objekte zum Skalieren.",
+      "ErrMove": "Fehler beim Verschieben.",
+      "ErrScale": "Fehler beim Skalieren."
     }
   }
 }

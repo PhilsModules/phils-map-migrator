@@ -1,0 +1,15 @@
+[1.3.0] Map Adjuster Feature
+
+This update introduces the **Map Adjuster**, a powerful tool to fix offsets after migration, and significantly improves the module's documentation.
+
+New Features:
+* MAP ADJUSTER: A graphical interface to move and scale Pins (Notes) and Tokens (Enemies) pixel-perfectly.
+   * Access it via the new "Fix" button in the Migrator.
+   * "Move" Control: Uses arrow keys for precise X/Y adjustment.
+   * "Scale" Control: Uses "Squish/Stretch" buttons to adjust spacing between grouped objects.
+   * Supports selection of only Pins, only Tokens, or both.
+* LOCALIZATION: Full English and German support for the new tool.
+
+Documentation:
+* Redesigned README matching the style of my other modules.
+* Added clear instructions for the new Adjuster tool.

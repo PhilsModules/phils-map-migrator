@@ -1,4 +1,5 @@
 
+import { MapAdjuster } from "./MapAdjuster.js";
 
 Hooks.once("init", () => {
     console.log("Phils Map Migrator | Initializing");
@@ -166,6 +167,12 @@ class MapMigrator extends FormApplication {
             const current = game.settings.get("phils-map-migrator", "useFolderView");
             await game.settings.set("phils-map-migrator", "useFolderView", !current);
             this.render(true);
+        });
+
+        // Open Map Adjuster
+        html.find("#btn-open-adjuster").click(e => {
+            e.preventDefault();
+            new MapAdjuster().render(true);
         });
 
         // Mass Select / Deselect

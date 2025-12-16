@@ -1,55 +1,34 @@
-# Phils Map Migrator 🗺️
+<div align="center">
 
-![Foundry v13 Compatible](https://img.shields.io/badge/Foundry-v13-brightgreen)
+# Phils Map Migrator
+
 ![Foundry v12 Compatible](https://img.shields.io/badge/Foundry-v12-green)
+![Foundry v13 Compatible](https://img.shields.io/badge/Foundry-v13-brightgreen)
+![System](https://img.shields.io/badge/System-Universal-blue)
 ![License](https://img.shields.io/badge/License-GPLv3-blue)
-![Version](https://img.shields.io/badge/Version-1.2.1-orange)
+[![Version](https://img.shields.io/badge/version-v1.3.0-blue)](https://github.com/PhilsModules/phils-map-migrator/releases)
+[![Patreon](https://img.shields.io/badge/SUPPORT-Patreon-ff424d?logo=patreon)](https://www.patreon.com/PhilsModules)
 
+<br>
 
-<a href="Updates.md"><img src="https://img.shields.io/badge/CHECK-Changelog-blue" style="height: 25px;"></a>
-<a href="https://www.patreon.com/PhilsModules"><img src="https://img.shields.io/badge/SUPPORT-Patreon-ff424d?logo=patreon" style="height: 25px;"></a>
+**Das Profi-Tool für präzise Karten-Migration in Foundry VTT – Wände, Lichter & Token per Klick.**
+<br>
+*The professional utility for precise map migration in Foundry VTT – Move walls, lights & tokens with a click.*
 
-**Phils Map Migrator** is a professional utility module for Foundry VTT designed to transfer scene data (Walls, Lights, Tokens, etc.) from one map to another with mathematical precision.
+<br>
 
-Stop manually realigning walls when upgrading from a draft map to a high-res version.
+<a href="#-deutsche-anleitung"><img src="https://img.shields.io/badge/%20-Deutsche_Anleitung-black?style=for-the-badge&logo=germany&logoColor=red" alt="Deutsche Anleitung"></a> <a href="#-english-instructions"><img src="https://img.shields.io/badge/%20-English_Instructions-black?style=for-the-badge&logo=united-kingdom&logoColor=white" alt="English Instructions"></a>
+</div>
 
-## 🚀 Key Features
+> [!TIP]
+> ### 💡 Geometry Failsafe / Geometrie-Wächter
+> **English:** The module checks your reference points mathematically. If you click the wrong corner on the target map, it warns you before distorting your walls.
+>
+> **Deutsch:** Das Modul prüft deine Referenzpunkte mathematisch. Wenn du auf der Zielkarte die falsche Ecke anklickst, warnt es dich, bevor deine Wände verzerrt werden.
 
+<br>
 
-
-* **Flexible Calibration (1-5 Points):**
-    * **1 Point:** Quick-Shift (perfect for identical maps with just an offset).
-    * **3-5 Points:** High Precision (uses averaging to fix distorted scans or hand-drawn grids).
-* **Geometry Failsafe:** The module now mathematically checks your points. If you click the wrong corner, it warns you before destroying your layout.
-* **Resolution Independent:** Works perfectly even if the new map has a different resolution or aspect ratio.
-* **Selective Migration:** Choose exactly what to copy:
-    * 🧱 Walls
-    * 💡 Lights (Ambient Lights)
-    * 👹 Tokens (Monsters/NPCs)
-    * 📍 Notes (Journal Pins)
-    * 🔊 Ambient Sounds
-    * ✏️ Drawings
-* **Safe & Clean:** Uses temporary PIXI graphics for markers (no database trash).
-
-## 📦 Installation
-1.  Open Foundry VTT -> **Add-on Modules**.
-2.  Click **Install Module**.
-3.  Paste Manifest URL:
-    ```
-    https://github.com/PhilsModules/phils-map-migrator/releases/latest/download/module.json
-    ```
-4.  Click **Install**.
-
-## 📖 How to Use
-1.  **Open Tool:** Click "Phils Map Migrator" in the Scenes Sidebar.
-2.  **Select Mode:** Choose **2 Points** (Standard) or **3+ Points** (Complex/Distorted Maps).
-3.  **Source:** Select source scene -> Click reference points (e.g., well, throne).
-4.  **Target:** Select target scene -> Click the **EXACT SAME** points.
-5.  **Migrate:** Select content -> Click **MIGRATE CONTENT**.
-
----
-
-# 🇩🇪 Deutsche Anleitung
+# <img src="https://flagcdn.com/48x36/de.png" width="28" height="21" alt="DE"> Deutsche Anleitung
 
 **Phils Map Migrator** ist das Profi-Tool, um Wände, Lichter und Token präzise von einer Karte auf eine andere zu übertragen.
 
@@ -63,39 +42,98 @@ Schluss mit manuellem Nachzeichnen oder stundenlangem Verschieben, nur weil du e
     * **3-5 Punkte:** Für schwierige Fälle (Scans, schräge Fotos). Das Tool berechnet den Durchschnitt, um Klick-Fehler oder Verzerrungen auszugleichen.
 * **Geometrie-Wächter (Failsafe):** Das Modul rechnet mit. Wenn du Punkt 3 auf der neuen Karte an die falsche Stelle setzt, warnt dich das Tool, bevor es Chaos anrichtet.
 * **Auflösungs-Unabhängig:** Egal ob die neue Karte 4k ist und die alte nur 720p – das Modul skaliert alles perfekt.
+* **Map Adjuster (Neu in v1.3.0):** Ein eingebautes Werkzeug ("Fix"-Button), um Pins und Token nachträglich präzise zu verschieben oder zu skalieren (z.B. wenn der Grid-Abstand nicht ganz stimmt).
 * **Selektiv:** Kopiere nur das, was du brauchst (z.B. nur Wände und Lichter, aber keine Token).
 
-## 📖 Kurzanleitung
+## 📖 Bedienung
 
 ### 1. Vorbereitung
 Du brauchst eine **Quell-Szene** (mit Wänden) und eine **Ziel-Szene** (leer).
 
-### 2. Kalibrierung (Das Herzstück)
-Öffne das Tool über den Button in der **Szenen-Leiste**.
+### 2. Kalibrierung
+Öffne das Tool über den Button **Map Migrator** in, oder unter der **Szenen-Leiste**.
 
 1.  **Modus wählen:**
     * Nimm **2 Punkte** für normale Karten.
-    * Nimm **3 bis 5 Punkte**, wenn die Karte verzerrt ist oder du es 100% perfekt haben willst.
+* Nimm **3 bis 5 Punkte**, wenn die Karte verzerrt ist oder du es 100% perfekt haben willst.
 2.  **Quelle definieren:** Wähle die alte Szene und klicke deine Referenzpunkte an (z.B. Brunnen, Statue, Raumecke).
 3.  **Ziel definieren:** Wähle die neue Szene und klicke **exakt dieselben** Punkte an.
 
 *Hinweis: Wenn die Punkte geometrisch nicht zusammenpassen, bekommst du eine Warnung!*
 
 ### 3. Migration
-Haken setzen bei allem, was mit soll (Wände, Lichter, etc.) und auf **INHALTE MIGRIEREN** klicken. Fertig.
+Haken setzen bei allem, was mit soll (Wände, Lichter, etc.) und auf **INHALTE MIGRIEREN** klicken.
 
-## 👨‍💻 Autor & Lizenz
-* **Phil** (GitHub: [PhilsModules](https://github.com/PhilsModules))
-## 📄 License
-This module is licensed under the [GPL-3.0 License](LICENSE).
+### 4. Adjuster (Optional)
+Falls die Gegner oder Pins leicht verschoben sind (weil das Grid der neuen Map minimal anders ist):
+1. Klicke auf den **Fix** Button (Werkzeug-Icon) im Migrator.
+2. Wähle **Token**, **Pins** oder **Beides**.
+3. Verschiebe sie Pixelgenau mit den Pfeilen oder passe den Abstand mit **Skalieren** an.
 
----
+<br>
+
+# <img src="https://flagcdn.com/48x36/gb.png" width="28" height="21" alt="EN"> English Instructions
+
+**Phils Map Migrator** is a professional utility module for Foundry VTT designed to transfer scene data (Walls, Lights, Tokens, etc.) from one map to another with mathematical precision.
+
+Stop manually realigning walls when upgrading from a draft map to a high-res version.
+
+## 🚀 Key Features
+
+* **Flexible Calibration (1-5 Points):**
+    * **1 Point:** Quick-Shift (perfect for identical maps with just an offset).
+    * **2 Points:** Standard (Scale & Align).
+    * **3-5 Points:** High Precision (uses averaging to fix distorted scans or hand-drawn grids).
+* **Geometry Failsafe:** The module now mathematically checks your points. If you click the wrong corner, it warns you before destroying your layout.
+* **Resolution Independent:** Works perfectly even if the new map has a different resolution or aspect ratio.
+* **Map Adjuster (New in v1.3.0):** A built-in tool ("Fix" button) to precisely move or scale tokens and pins after migration (e.g., if the grid spacing was slightly off).
+* **Selective Migration:** Choose exactly what to copy (Walls, Lights, Tokens, etc.).
+
+## 📖 How to Use
+
+### 1. Preparation
+You need a **Source Scene** (with data) and a **Target Scene** (empty).
+
+### 2. Calibration
+Open the tool via the **Map Migrator** button in/below the **Scenes Sidebar**.
+
+1.  **Select Mode:**
+    * Use **2 Points** for standard maps.
+    * Use **3 to 5 Points** for distorted maps or maximum precision.
+2.  **Source:** Select source scene -> Click reference points (e.g., well, throne, corner).
+3.  **Target:** Select target scene -> Click the **EXACT SAME** points.
+
+*Note: The module warns you if the geometry doesn't match!*
+
+### 3. Migrate
+Check the boxes for content you want to copy (Walls, Lights, etc.) and click **MIGRATE CONTENT**.
+
+### 4. Adjuster (Optional)
+If tokens or pins are slightly off (e.g., new map grid is slightly different):
+1. Click the **Fix** button (Tools icon) in the Migrator.
+2. Select **Tokens**, **Pins**, or **Both**.
+3. Nudge them with arrow keys or adjust spacing with **Scale** controls.
+
+<br>
+
+# 📦 Installation
+
+1.  Open Foundry VTT.
+2.  Go to **Add-on Modules**.
+3.  Click **Install Module**.
+4.  Paste the following **Manifest URL**:
+    ```text
+    https://github.com/PhilsModules/phils-map-migrator/releases/latest/download/module.json
+    ```
+5.  Click **Install**.
+
 <div align="center">
     <h2>❤️ Support the Development</h2>
     <p>If you enjoy this module and want to support open-source development for Foundry VTT, check out my Patreon!</p>
     <p>Gefällt dir das Modul? Unterstütze die Weiterentwicklung auf Patreon!</p>
     <a href="https://www.patreon.com/PhilsModules">
-        <img src="https://c5.patreon.com/external/logo/become_a_patron_button.png" alt="Become a Patron" />
+        <img src="https://c5.patreon.com/external/logo/become_a_patron_button.png" alt="Become a Patron" width="200" />
     </a>
-    <p>Made with ❤️ for the Foundry VTT Community</p>
+    <br><br>
+    <p><i>Made with ❤️ for the Foundry VTT Community</i></p>
 </div>

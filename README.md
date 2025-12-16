@@ -56,6 +56,16 @@ Anstatt alles neu zu zeichnen, überträgt dieses Modul deine Arbeit mathematisc
 * **Auflösungs-Unabhängig:** Egal ob von 720p auf 4k oder umgekehrt – das Verhältnis bleibt perfekt.
 * **Inhalt Wählbar:** Entscheide selbst, ob du Token mitnehmen willst oder nur die Architektur (Wände/Lichter).
 
+# 📦 Installation
+
+1.  Open Foundry VTT.
+2.  Go to **Add-on Modules** -> **Install Module**.
+3.  Paste the following **Manifest URL**:
+    ```text
+    https://github.com/PhilsModules/phils-map-migrator/releases/latest/download/module.json
+    ```
+4.  Click **Install**.
+
 ---
 
 ## 🛠️ Schritt-für-Schritt Anleitung
@@ -167,15 +177,7 @@ Sometimes the grid of the new map is slightly different, or you want to nudge al
 
 ---
 
-# 📦 Installation
 
-1.  Open Foundry VTT.
-2.  Go to **Add-on Modules** -> **Install Module**.
-3.  Paste the following **Manifest URL**:
-    ```text
-    [https://github.com/PhilsModules/phils-map-migrator/releases/latest/download/module.json](https://github.com/PhilsModules/phils-map-migrator/releases/latest/download/module.json)
-    ```
-4.  Click **Install**.
 
 <div align="center">
     <h2>❤️ Support the Development</h2>

@@ -1,11 +1,15 @@
-# v1.3.0 - Map Adjuster & Polish
+# v1.4.0 - Map Adjuster & Polish
 
 *   **New Feature: Map Adjuster (Fix Offsets)**
     *   Added a new "Fix" tool inside the Migrator window.
     *   Allows moving (X/Y) and scaling (Spacing) of tokens and notes after migration.
     *   Supports moving Pins, Tokens, or both simultaneously.
-*   **Localization**: Added full English and German localization for the new tool.
-*   **UI Improvements**: Integrated the new tool seamlessly into the existing interface.
+*   **Technical Update: ApplicationV2**
+    *   Refactored the entire module to use the new `ApplicationV2` API.
+    *   Future-proofed for Foundry V13+.
+*   **UI Polish**:
+    *   Improved Dark Mode support (text colors now adapt correctly).
+    *   Integrated the new tool seamlessly into the existing interface.
 
 # v1.2.1 - Sorting & Stability Update Latest
 

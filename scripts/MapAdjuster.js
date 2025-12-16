@@ -1,4 +1,6 @@
-export class MapAdjuster extends FormApplication {
+const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
+
+export class MapAdjuster extends HandlebarsApplicationMixin(ApplicationV2) {
     constructor() {
         super();
         this.step = 50;
@@ -7,18 +9,30 @@ export class MapAdjuster extends FormApplication {
         this.isProcessing = false;
     }
 
-    static get defaultOptions() {
-        return mergeObject(super.defaultOptions, {
-            id: "phils-map-adjuster",
-            title: game.i18n.localize("PMM.Adjuster.Title"),
-            template: "modules/phils-map-migrator/templates/adjuster.html",
-            width: 320,
-            height: "auto",
+    static DEFAULT_OPTIONS = {
+        tag: "form",
+        id: "phils-map-adjuster",
+        window: {
+            title: "PMM.Adjuster.Title",
             resizable: false
-        });
-    }
+        },
+        position: {
+            width: 320,
+            height: "auto"
+        },
+        form: {
+            handler: "onSubmit",
+            closeOnSubmit: false
+        }
+    };
 
-    getData() {
+    static PARTS = {
+        form: {
+            template: "modules/phils-map-migrator/templates/adjuster.html"
+        }
+    };
+
+    async _prepareContext(options) {
         return {
             step: this.step,
             scalePercent: this.scalePercent,
@@ -26,25 +40,30 @@ export class MapAdjuster extends FormApplication {
         };
     }
 
-    activateListeners(html) {
-        super.activateListeners(html);
-
+    _onRender(context, options) {
         // Inputs
-        html.find("#adj-step").change(e => this.step = parseInt(e.target.value) || 50);
-        html.find("#adj-scale").change(e => this.scalePercent = parseFloat(e.target.value) || 5);
-        html.find("input[name='target-type']").change(e => this.targetType = e.target.value);
+        const stepInput = this.element.querySelector("#adj-step");
+        if (stepInput) stepInput.addEventListener("change", e => this.step = parseInt(e.target.value) || 50);
+
+        const scaleInput = this.element.querySelector("#adj-scale");
+        if (scaleInput) scaleInput.addEventListener("change", e => this.scalePercent = parseFloat(e.target.value) || 5);
+
+        const typeInputs = this.element.querySelectorAll("input[name='target-type']");
+        typeInputs.forEach(input => {
+            input.addEventListener("change", e => this.targetType = e.target.value);
+        });
 
         // Move Buttons
-        html.find("#btn-adj-up").click(() => this.move(0, -1));
-        html.find("#btn-adj-down").click(() => this.move(0, 1));
-        html.find("#btn-adj-left").click(() => this.move(-1, 0));
-        html.find("#btn-adj-right").click(() => this.move(1, 0));
+        this.element.querySelector("#btn-adj-up")?.addEventListener("click", () => this.move(0, -1));
+        this.element.querySelector("#btn-adj-down")?.addEventListener("click", () => this.move(0, 1));
+        this.element.querySelector("#btn-adj-left")?.addEventListener("click", () => this.move(-1, 0));
+        this.element.querySelector("#btn-adj-right")?.addEventListener("click", () => this.move(1, 0));
 
         // Scale Buttons
-        html.find("#btn-adj-stretch-x").click(() => this.scale("x", "stretch"));
-        html.find("#btn-adj-squish-x").click(() => this.scale("x", "squish"));
-        html.find("#btn-adj-stretch-y").click(() => this.scale("y", "stretch"));
-        html.find("#btn-adj-squish-y").click(() => this.scale("y", "squish"));
+        this.element.querySelector("#btn-adj-stretch-x")?.addEventListener("click", () => this.scale("x", "stretch"));
+        this.element.querySelector("#btn-adj-squish-x")?.addEventListener("click", () => this.scale("x", "squish"));
+        this.element.querySelector("#btn-adj-stretch-y")?.addEventListener("click", () => this.scale("y", "stretch"));
+        this.element.querySelector("#btn-adj-squish-y")?.addEventListener("click", () => this.scale("y", "squish"));
     }
 
     getTargets() {
@@ -145,5 +164,10 @@ export class MapAdjuster extends FormApplication {
     targetsToUpdates(placeables) {
         // Just return the placeables, we extract data later
         return placeables;
+    }
+
+    // Stub for form handling if needed, though we use buttons
+    async onSubmit(event, form, formData) {
+        return;
     }
 }

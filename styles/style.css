@@ -1,6 +1,6 @@
 .pmm-window .window-content {
     background: #f1ebd6;
-    color: #191813;
+    color: inherit;
     font-family: "Signika", sans-serif;
     padding: 10px;
     /* Reduced padding */
@@ -53,7 +53,7 @@
     align-items: center;
     gap: 5px;
     font-size: 0.9em;
-    color: #4b4a44;
+    color: inherit;
 }
 
 .pmm-flex {
@@ -98,7 +98,7 @@
 
 #btn-toggle-view {
     font-size: 1.2em;
-    color: #191813;
+    color: inherit;
     display: flex;
     align-items: center;
     transition: all 0.2s;

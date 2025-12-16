@@ -1,6 +1,8 @@
 
 import { MapAdjuster } from "./MapAdjuster.js";
 
+const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
+
 Hooks.once("init", () => {
     console.log("Phils Map Migrator | Initializing");
 
@@ -34,7 +36,7 @@ Hooks.on("renderSceneDirectory", (app, html, data) => {
     }
 });
 
-class MapMigrator extends FormApplication {
+class MapMigrator extends HandlebarsApplicationMixin(ApplicationV2) {
     constructor() {
         super();
         this.sourceSceneId = null;
@@ -44,16 +46,30 @@ class MapMigrator extends FormApplication {
         this.calibrationMode = 2; // Default: 2 Punkte
     }
 
-    static get defaultOptions() {
-        return mergeObject(super.defaultOptions, {
-            id: "phils-map-migrator",
+    static DEFAULT_OPTIONS = {
+        tag: "form",
+        id: "phils-map-migrator",
+        window: {
             title: "Phils Map Migrator",
-            template: "modules/phils-map-migrator/templates/migrator.html",
-            width: 400
-        });
-    }
+            resizable: true // Matches previous width behavior but clearer
+        },
+        position: {
+            width: 400,
+            height: "auto"
+        },
+        form: {
+            handler: "onSubmit",
+            closeOnSubmit: false
+        }
+    };
 
-    getData() {
+    static PARTS = {
+        form: {
+            template: "modules/phils-map-migrator/templates/migrator.html"
+        }
+    };
+
+    async _prepareContext(options) {
         const useFolderView = game.settings.get("phils-map-migrator", "useFolderView");
         const scenes = game.scenes.contents;
         const folders = {};
@@ -158,11 +174,9 @@ class MapMigrator extends FormApplication {
         };
     }
 
-    activateListeners(html) {
-        super.activateListeners(html);
-
+    _onRender(context, options) {
         // Toggle View
-        html.find("#btn-toggle-view").click(async (e) => {
+        this.element.querySelector("#btn-toggle-view")?.addEventListener("click", async (e) => {
             e.preventDefault();
             const current = game.settings.get("phils-map-migrator", "useFolderView");
             await game.settings.set("phils-map-migrator", "useFolderView", !current);
@@ -170,38 +184,53 @@ class MapMigrator extends FormApplication {
         });
 
         // Open Map Adjuster
-        html.find("#btn-open-adjuster").click(e => {
+        this.element.querySelector("#btn-open-adjuster")?.addEventListener("click", e => {
             e.preventDefault();
             new MapAdjuster().render(true);
         });
 
         // Mass Select / Deselect
-        html.find(".pmm-select-all").click(e => {
+        this.element.querySelector(".pmm-select-all")?.addEventListener("click", e => {
             e.preventDefault();
-            const checkboxes = html.find(".pmm-grid input[type='checkbox']");
-            const allChecked = checkboxes.length === checkboxes.filter(":checked").length;
-            checkboxes.prop("checked", !allChecked);
+            const checkboxes = this.element.querySelectorAll(".pmm-grid input[type='checkbox']");
+            const allChecked = Array.from(checkboxes).every(c => c.checked);
+
+            checkboxes.forEach(c => c.checked = !allChecked);
 
             // Update link text
-            const link = $(e.target);
-            link.text(allChecked ? game.i18n.localize("PMM.SelectAll") : game.i18n.localize("PMM.DeselectAll"));
+            const link = e.target;
+            link.innerText = allChecked ? game.i18n.localize("PMM.SelectAll") : game.i18n.localize("PMM.DeselectAll");
         });
 
-        // Speichere die Auswahl sofort, wenn der User sie ändert
-        html.find("#cal-mode").change(e => {
+        // Save mode change
+        this.element.querySelector("#cal-mode")?.addEventListener("change", e => {
             this.calibrationMode = parseInt(e.target.value);
             console.log("PMM: Mode changed to", this.calibrationMode);
         });
 
-        html.find("#source-scene").change(e => this.sourceSceneId = e.target.value);
-        html.find("#target-scene").change(e => this.targetSceneId = e.target.value);
+        // Scene Selectors
+        this.element.querySelector("#source-scene")?.addEventListener("change", e => this.sourceSceneId = e.target.value);
+        this.element.querySelector("#target-scene")?.addEventListener("change", e => this.targetSceneId = e.target.value);
 
-        html.find("#btn-cal-source").click(() => this.startCalibration("source"));
-        html.find("#btn-cal-target").click(() => this.startCalibration("target"));
-        html.find("#btn-migrate").click((e) => this._onMigrate(e));
+        // Buttons
+        this.element.querySelector("#btn-cal-source")?.addEventListener("click", () => this.startCalibration("source"));
+        this.element.querySelector("#btn-cal-target")?.addEventListener("click", () => this.startCalibration("target"));
+        this.element.querySelector("#btn-migrate")?.addEventListener("click", (e) => this._onMigrate(e));
 
-        if (!this.sourceSceneId) this.sourceSceneId = html.find("#source-scene").val();
-        if (!this.targetSceneId) this.targetSceneId = html.find("#target-scene").val();
+        // Restore State (if re-rendering)
+        if (!this.sourceSceneId) {
+            const srcVal = this.element.querySelector("#source-scene")?.value;
+            if (srcVal) this.sourceSceneId = srcVal;
+        }
+        if (!this.targetSceneId) {
+            const tgtVal = this.element.querySelector("#target-scene")?.value;
+            if (tgtVal) this.targetSceneId = tgtVal;
+        }
+    }
+
+    // Stub form submission
+    async onSubmit(event, form, formData) {
+        return;
     }
 
     async startCalibration(type) {
@@ -278,16 +307,11 @@ class MapMigrator extends FormApplication {
     }
 
     async confirmDialog(msg) {
-        return new Promise(resolve => {
-            new Dialog({
-                title: "Warning",
-                content: `<p>${msg}</p><p>Continue anyway?</p>`,
-                buttons: {
-                    yes: { label: "Yes", callback: () => resolve(true) },
-                    no: { label: "No", callback: () => resolve(false) }
-                },
-                default: "no"
-            }).render(true);
+        return foundry.applications.api.DialogV2.confirm({
+            window: { title: "Warning" },
+            content: `<p>${msg}</p><p>Continue anyway?</p>`,
+            onYes: () => true,
+            onNo: () => false
         });
     }
 
@@ -304,7 +328,7 @@ class MapMigrator extends FormApplication {
             return;
         }
 
-        const createBackup = this.element.find("#chk-backup").is(":checked");
+        const createBackup = this.element.querySelector("#chk-backup")?.checked;
         if (createBackup) {
             ui.notifications.info("Creating Backup...");
             try {
@@ -319,19 +343,18 @@ class MapMigrator extends FormApplication {
         }
 
         const options = {
-            walls: this.element.find("#chk-walls").is(":checked"),
-            lights: this.element.find("#chk-lights").is(":checked"),
-            tokens: this.element.find("#chk-tokens").is(":checked"),
-            notes: this.element.find("#chk-notes").is(":checked"),
-            sounds: this.element.find("#chk-sounds").is(":checked"),
-            drawings: this.element.find("#chk-drawings").is(":checked")
+            walls: this.element.querySelector("#chk-walls")?.checked,
+            lights: this.element.querySelector("#chk-lights")?.checked,
+            tokens: this.element.querySelector("#chk-tokens")?.checked,
+            notes: this.element.querySelector("#chk-notes")?.checked,
+            sounds: this.element.querySelector("#chk-sounds")?.checked,
+            drawings: this.element.querySelector("#chk-drawings")?.checked
         };
 
         this.migrateContent(options);
     }
 
     async migrateContent(checks) {
-        const html = this.element;
         const neededPoints = this.calibrationMode || 2;
         console.log(`PMM: Run Migration. Mode: ${neededPoints}`);
 
@@ -339,7 +362,8 @@ class MapMigrator extends FormApplication {
         const geoCheck = this.checkGeometry(neededPoints);
         if (!geoCheck.ok) {
             console.warn("PMM: Geometry mismatch detected!");
-            // Warten auf User Input
+
+            // Replaced deprecated Dialog with DialogV2 or simply logic above
             const proceed = await this.confirmDialog(geoCheck.error);
             if (!proceed) {
                 console.log("PMM: User cancelled migration due to geometry mismatch.");
@@ -392,8 +416,8 @@ class MapMigrator extends FormApplication {
             if (!collection || collection.size === 0) return [];
             return collection.map(doc => {
                 const d = doc.toObject();
-                delete d._id;
-                delete d._stats;
+                // delete d._id; // createEmbeddedDocuments handles this or keep it, usually safest to remove ID
+                // delete d._stats;
                 const pos = transform({ x: d.x, y: d.y });
                 d.x = pos.x; d.y = pos.y;
 

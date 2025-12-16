@@ -6,7 +6,7 @@
 ![Foundry v13 Compatible](https://img.shields.io/badge/Foundry-v13-brightgreen)
 ![System](https://img.shields.io/badge/System-Universal-blue)
 ![License](https://img.shields.io/badge/License-GPLv3-blue)
-[![Version](https://img.shields.io/badge/version-v1.3.0-blue)](https://github.com/PhilsModules/phils-map-migrator/releases)
+[![Version](https://img.shields.io/badge/version-v1.4.0-blue)](https://github.com/PhilsModules/phils-map-migrator/releases)
 [![Patreon](https://img.shields.io/badge/SUPPORT-Patreon-ff424d?logo=patreon)](https://www.patreon.com/PhilsModules)
 
 <br>

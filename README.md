@@ -2,7 +2,7 @@
 
 # Phil's Map Migrator
 
-![Foundry v13 Compatible](https://img.shields.io/badge/Foundry-v13-brightgreen?style=flat-square) ![Foundry v12 Compatible](https://img.shields.io/badge/Foundry-v12-green?style=flat-square) ![License](https://img.shields.io/badge/License-GPLv3-blue?style=flat-square)
+![Foundry v13 Compatible](https://img.shields.io/badge/Foundry-v13-brightgreen?style=flat-square) ![Foundry v12 Compatible](https://img.shields.io/badge/Foundry-v12-green?style=flat-square) ![License](https://img.shields.io/badge/License-GPLv3_%2F_CC_BY--NC--ND-blue?style=flat-square)
 [![Version](https://img.shields.io/badge/Version-1.4.1-orange?style=flat-square)](https://github.com/PhilsModules/phils-map-migrator/releases) [![Patreon](https://img.shields.io/badge/SUPPORT-Patreon-ff424d?style=flat-square&logo=patreon)](https://www.patreon.com/PhilsModules)
 
 <br>
@@ -161,7 +161,12 @@ Falls die Gegner oder Pins leicht verschoben sind (weil das Grid der neuen Map m
 
 ## 📜 License
 
-This module is licensed under the [GPL-3.0 License](LICENSE).
+This module uses a dual license structure.
+
+- **Code:** GNU GPLv3
+- **Assets:** CC BY-NC-ND 4.0
+
+See `LICENSE` file for details.
 
 <br>
 

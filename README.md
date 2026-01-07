@@ -33,6 +33,14 @@ _Das Profi-Tool für präzise Karten-Migration in Foundry VTT – Wände, Lichte
 
 <br>
 
+<div align="center">
+<img src="https://github.com/PhilsModules/phils-map-migrator/blob/main/covers.png" alt="Preview" width="400">
+</div>
+
+<br>
+
+<br>
+
 # <img src="https://flagcdn.com/48x36/gb.png" width="28" height="21" alt="EN"> English Instructions
 
 **Phils Map Migrator** is a professional utility module for Foundry VTT designed to transfer scene data (Walls, Lights, Tokens, etc.) from one map to another with mathematical precision.

@@ -17,7 +17,7 @@ _The professional utility for precise map migration in Foundry VTT – Move wall
 
 <br>
 
-<a href="#-deutsche-anleitung"><img src="https://img.shields.io/badge/%20-Deutsche_Anleitung-black?style=for-the-badge&logo=germany&logoColor=red" alt="Deutsche Anleitung"></a> <a href="#-english-instructions"><img src="https://img.shields.io/badge/%20-English_Instructions-black?style=for-the-badge&logo=united-kingdom&logoColor=white" alt="English Instructions"></a>
+<a href="#-deutsche-anleitung"><img src="https://img.shields.io/badge/%20-Deutsche_Anleitung-black?style=for-the-badge&logo=germany&logoColor=red" alt="Deutsche Anleitung"></a> <a href="#-english-instructions"><img src="https://img.shields.io/badge/%20-English_Instructions-black?style=for-the-badge&logo=united-kingdom&logoColor=white" alt="English Instructions"></a> <a href="#-more-modules-by-phil--meine-weiteren-module"><img src="https://img.shields.io/badge/%20-More_Modules_%2F_Weitere_Module-black?style=for-the-badge&logo=github&logoColor=white" alt="More Modules / Weitere Module"></a>
 
 </div>
 
